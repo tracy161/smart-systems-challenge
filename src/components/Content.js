@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Size from './Size';
 import '../App.css';
 
-const Content = ({ child }) => {
+const Content = ({ item }) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = (e) => {
@@ -14,35 +15,29 @@ const Content = ({ child }) => {
       <ul className='folders list-unstyled'>
         <li style={{ paddingLeft: '50px' }}>
           <a href='!#' onClick={handleClick}>
-            {child.type === 'folder' ? (
+            {item.type === 'folder' ? (
               <i
                 className={!open ? 'fa fa-angle-right' : 'fa fa-angle-down'}
               ></i>
-            ) : <i>&nbsp;</i>}
-            <i
-              className={
-                child.type === 'folder' ? 'fa fa-folder' : 'fa fa-file-text'
-              }
-            ></i>{' '}
-            {child.name}
+            ) : (
+              <i>&nbsp;</i>
+            )}
+            {item.type === 'folder' ? (
+              <i className={!open ? 'fa fa-folder' : 'fa fa-folder-open'}></i>
+            ) : (
+              <i className='fa fa-file-text'></i>
+            )}{' '}
+            {item.name} &nbsp;{' '}
+            {item.type === 'file' && (
+              <small>
+                <Size size={item.size} />
+              </small>
+            )}
           </a>
           {open && (
             <div className='dropdown'>
-              {child.children.map((item, index) => (
-                <ul className='folders list-unstyled'>
-                  <li key={index} style={{ paddingLeft: '50px' }}>
-                    <a href=''>
-                      <i
-                        className={
-                          item.type === 'folder'
-                            ? 'fa fa-folder'
-                            : 'fa fa-file-text'
-                        }
-                      ></i>{' '}
-                      {item.name}
-                    </a>
-                  </li>
-                </ul>
+              {item.children.map((item, index) => (
+                <Content key={index} item={item} />
               ))}
             </div>
           )}

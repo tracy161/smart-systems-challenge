@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Panel from './components/Panel';
-import Content from './components/Content';
 import './App.css';
 
 function App() {
@@ -24,13 +23,6 @@ function App() {
           </div>
         </div>
       </div>
-      {/* <div className='col-sm-7 tab-content no-bg no-border'>
-        <div className='tab-pane active documents documents-panel'>
-          {state.map((item, index) => (
-            <Content key={index} item={item} />
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 }

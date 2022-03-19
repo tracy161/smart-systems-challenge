@@ -22,8 +22,8 @@ const Panel = ({ item }) => {
           </a>
           {open && (
             <div className='dropdown'>
-              {item.children.map((child, index) => (
-                <Content key={index} child={child}/>
+              {item.children.map((item, index) => (
+                <Content key={index} item={item}/>
               ))}
             </div>
           )}
