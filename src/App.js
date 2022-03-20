@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Panel from './components/Panel';
+import TotalSize from './components/TotalSize';
+import TotalFiles from './components/TotalFiles';
 import './App.css';
 
 function App() {
-  const [state, setState] = useState([]);
+  const [state, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://dev21.becollective.com/api/v2/coding-challenges/dirs`)
-      .then((res) => res.json())
-      .then((data) => setState(data))
-      .catch((err) => console.log(err));
+    const url = `https://dev21.becollective.com/api/v2/coding-challenges/dirs`;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -20,6 +31,18 @@ function App() {
             {state.map((item, index) => (
               <Panel key={index} item={item} />
             ))}
+          </div>
+        </div>
+      </div>
+      <div className='col-sm-12'>
+        <div className='panel panel-dark-outline tabs-panel'>
+          <div className='panel-body tab-content'>
+            <h1>
+              Total Files: <TotalFiles data={state} />
+            </h1>
+            <h1>
+              Total Size: <TotalSize data={state} />
+            </h1>
           </div>
         </div>
       </div>

@@ -14,26 +14,27 @@ const Content = ({ item }) => {
     <>
       <ul className='folders list-unstyled'>
         <li style={{ paddingLeft: '50px' }}>
-          <a href='!#' onClick={handleClick}>
-            {item.type === 'folder' ? (
+          {item.type === 'folder' ? (
+            <a href='!#' onClick={handleClick}>
               <i
                 className={!open ? 'fa fa-angle-right' : 'fa fa-angle-down'}
               ></i>
-            ) : (
-              <i>&nbsp;</i>
-            )}
-            {item.type === 'folder' ? (
               <i className={!open ? 'fa fa-folder' : 'fa fa-folder-open'}></i>
-            ) : (
+              {item.name} &nbsp;{' '}
+            </a>
+          ) : (
+            <a href='#!'>
+              <i>&nbsp;</i>
               <i className='fa fa-file-text'></i>
-            )}{' '}
-            {item.name} &nbsp;{' '}
-            {item.type === 'file' && (
-              <small>
-                <Size size={item.size} />
-              </small>
-            )}
-          </a>
+              {item.name} &nbsp;{' '}
+              {item.type === 'file' && (
+                <small>
+                  <Size size={item.size} />
+                </small>
+              )}
+            </a>
+          )}
+
           {open && (
             <div className='dropdown'>
               {item.children.map((item, index) => (
