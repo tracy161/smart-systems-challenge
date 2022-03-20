@@ -8,7 +8,7 @@ function App() {
   const [state, setData] = useState([]);
 
   useEffect(() => {
-    const url = `https://dev21.becollective.com/api/v2/coding-challenges/dirs`;
+    const url = process.env.REACT_APP_URL;
 
     const fetchData = async () => {
       try {
